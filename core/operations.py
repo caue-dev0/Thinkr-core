@@ -78,3 +78,48 @@ def enter(state: EditorState) -> EditorState:
         line=line + 1,
         col=0
     )
+
+def move_left(state: EditorState) -> EditorState:
+    lines = state.lines
+    line = state.line
+    col = state.col
+
+    if line == 0 and col == 0:
+        return state
+    
+    if col > 0:
+        return  EditorState(
+            lines=lines,
+            line=line,
+            col=col - 1
+        )
+    
+    prev_line_len = len(lines[line - 1])
+    return EditorState(
+        lines=lines,
+        line=line - 1,
+        col=prev_line_len
+    )
+
+def move_right(state: EditorState) -> EditorState:
+    lines = state.lines
+    line = state.line
+    col = state.col
+
+    current_line = lines[line]
+
+    if col < len(current_line):
+        return EditorState(
+            lines=lines,
+            line=line,
+            col=col + 1
+        )
+    
+    if line < len(lines) - 1:
+        return EditorState(
+            lines=lines,
+            line=line + 1,
+            col=0
+        )
+
+    return state
