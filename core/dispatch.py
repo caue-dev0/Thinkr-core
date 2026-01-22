@@ -1,0 +1,29 @@
+from core.state import EditorState
+from core.actions import *
+from core import operations as ops
+
+def dispatch(state: EditorState, action: Action) -> EditorState:
+    match action:
+        case Insert(value=value):
+            return ops.insert_text(state, value)
+        
+        case Backspace():
+            return ops.backspace(state)
+        
+        case Enter():
+            return ops.backspace(state)
+        
+        case MoveLeft():
+            return ops.move_left(state)
+        
+        case MoveRight():
+            return ops.move_right(state)
+        
+        case MoveUp():
+            return ops.move_up(state)
+        
+        case MoveDown():
+            return ops.move_down(state)
+        
+        case _:
+            return state
