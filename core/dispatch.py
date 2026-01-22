@@ -13,6 +13,9 @@ def dispatch(state: EditorState, action: Action) -> EditorState:
         case Enter():
             return ops.backspace(state)
         
+        case Delete():
+            return ops.delete(state)
+        
         case MoveLeft():
             return ops.move_left(state)
         

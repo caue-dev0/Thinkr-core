@@ -79,6 +79,43 @@ def enter(state: EditorState) -> EditorState:
         col=0
     )
 
+def delete(state: EditorState) -> EditorState:
+    lines = state.lines
+    line = state.line
+    col = state.col
+
+    current_line = lines[line]
+
+    if col < lines[line - 1]:
+        before = current_line[:col]
+        after = current_line[col + 1:]
+
+        new_line = before + after
+        new_lines = lines.copy()
+        new_lines[line] = new_line
+
+        return EditorState(
+            lines=new_lines,
+            line=line,
+            col=col
+        )
+    
+    if line < len(lines) - 1:
+        next_line = lines[line + 1]
+        merged = current_line + next_line
+
+        new_lines = lines.copy()
+        new_lines[line] = merged
+        new_lines.pop(line+1)
+
+        return EditorState(
+            lines=new_lines,
+            line=line,
+            col=col
+        )
+    
+    return state
+
 def move_left(state: EditorState) -> EditorState:
     lines = state.lines
     line = state.line

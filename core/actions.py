@@ -13,6 +13,8 @@ class Backspace():
 class Enter(Action):
     pass
 
+class Delete(Action):
+    pass
 
 class MoveLeft(Action):
     pass
