@@ -40,7 +40,7 @@ def backspace(state: EditorState) -> EditorState:
 
         return EditorState(
             lines=new_lines,
-            line=new_line,
+            line=line,
             col=col -1
         )
     
@@ -55,7 +55,7 @@ def backspace(state: EditorState) -> EditorState:
 
     return EditorState(
         lines=new_lines,
-        line=new_line,
+        line=line - 1,
         col=len(prev_line)
     )
 
@@ -89,14 +89,14 @@ def move_left(state: EditorState) -> EditorState:
     
     if col > 0:
         return  EditorState(
-            lines=lines,
+            lines=lines.copy(),
             line=line,
             col=col - 1
         )
     
     prev_line_len = len(lines[line - 1])
     return EditorState(
-        lines=lines,
+        lines=lines.copy(),
         line=line - 1,
         col=prev_line_len
     )
@@ -110,14 +110,14 @@ def move_right(state: EditorState) -> EditorState:
 
     if col < len(current_line):
         return EditorState(
-            lines=lines,
+            lines=lines.copy(),
             line=line,
             col=col + 1
         )
     
     if line < len(lines) - 1:
         return EditorState(
-            lines=lines,
+            lines=lines.copy(),
             line=line + 1,
             col=0
         )
@@ -136,7 +136,7 @@ def move_up(state: EditorState) -> EditorState:
     new_col = min(col, len(lines[new_line]))
 
     return EditorState(
-        lines=lines,
+        lines=lines.copy(),
         line=new_line,
         col=new_col
     )
@@ -153,7 +153,7 @@ def move_down(state: EditorState) -> EditorState:
     new_col = min(col, len(lines[new_line]))
 
     return EditorState(
-        lines=lines,
+        lines=lines.copy(),
         line=new_line,
         col=new_col
     )
