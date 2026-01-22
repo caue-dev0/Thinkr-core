@@ -27,3 +27,9 @@ class MoveUp(Action):
 
 class MoveDown(Action):
     pass
+
+class Home(Action):
+    pass
+
+class End(Action):
+    pass

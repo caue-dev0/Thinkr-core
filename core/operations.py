@@ -194,3 +194,20 @@ def move_down(state: EditorState) -> EditorState:
         line=new_line,
         col=new_col
     )
+
+def move_home(state: EditorState) -> EditorState:
+    return EditorState(
+        lines=state.lines.copy(),
+        line=state.line,
+        col=0
+    )
+
+def move_end(state: EditorState) -> EditorState:
+    line = state.line
+    lines = state.lines
+
+    return EditorState(
+        lines=lines.copy(),
+        line=line,
+        col=len(lines[line])
+    )

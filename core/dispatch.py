@@ -28,5 +28,11 @@ def dispatch(state: EditorState, action: Action) -> EditorState:
         case MoveDown():
             return ops.move_down(state)
         
+        case Home():
+            return ops.move_home(state)
+        
+        case End():
+            return ops.move_end(state)
+        
         case _:
             return state
